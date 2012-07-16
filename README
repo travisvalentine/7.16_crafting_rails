@@ -2,7 +2,7 @@ Presentation on [Crafting Rails Applications: Expert Practices for Everyday Rail
 
 Note to self: when using showoff and heroku, remember these steps for deploying to Heroku:
 
-- heroku create logrotate
+- heroku create crafting-rails
 - bundle install
 - git add Gemfile Gemfile.lock config.ru
 - git commit -m 'herokuized'
