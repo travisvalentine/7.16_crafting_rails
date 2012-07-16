@@ -1,120 +1,99 @@
 !SLIDE center
-# Logrotate #
-
-!SLIDE subsection
-# Pop quiz, hot shot #
-
-!SLIDE bullets incremental
-# The scenario... #
-
-* You put a ton of effort into building a great app
-* It's fast
-* It's tested
-
-!SLIDE subsection
-# Just one problem #
-
-!SLIDE center transition=uncover
-# The server keeps crashing #
-
-!SLIDE bullets incremental
-# Why? #
-
-* Turns out the logs are too big
-* The RAM is full
-* There is no disk space
-* This causes problems debugging
-
-!SLIDE center
-# You're not alone #
-
-* This is actually one of the most common ways a junior sys-admin can mess up a server
-
-!SLIDE subsection
-# How to prevent this #
-
-!SLIDE center transition=scrollUp
-# Rotate your logs #
-
-!SLIDE center bullets
-# The good news #
-
-* It's surprisingly easy(*) to avoid
-
-!SLIDE subsection transition=fade
-# Enter logrotate #
+# [Crafting Rails Applications: Expert Practices for Everyday Rails Development](http://www.amazon.com/Crafting-Rails-Applications-Development-Programmers/dp/1934356735/ref=wl_it_dp_v_S_nC?ie=UTF8&coliid=I9J4XAYHBBMGA&colid=K7D6CDDMZG6S) #
 
 !SLIDE
-# What Is It? #
+# The Author - José Valim #
 
-* a utility to manage and administer log files
-
-!SLIDE bullets incremental
-# How it Works #
-
-* set up in a config file
-* runs as a cron job
-* takes the log file, copies the data into another file that is timestamped in a directory you specify
-* deletes older logs after certain time
-* most operating systems(*) have it installed
+![Jose](tendervalim.jpg)
 
 !SLIDE bullets incremental
-# Some Features #
+# The Disclaimer #
 
-* rotated a number of times before getting deleted
-* allows automatic rotation, compression, removal, and mailing of log files
-* each log file may be handled daily, weekly, monthly, or when it grows too large
+* Everyday is a reach
+* Great for those who want to dig into source
+* 7 tutorials, each built using TDD with Rails 3.0.3
+* Not for beginners
+
+!SLIDE bullets incremental
+# Topics covered #
+
+* Templates, Responders, Engines, Railties, Routing, Rack, Instruments, and more.
 
 !SLIDE bullets
-# Why it's useful #
+# Main Tool: Enginex #
 
-* logs have short-term value
-* when they are rotated, you get rid of the invaluable stuff
+* gem that generates a bare gem
+* think `rails new project`
 
-!SLIDE subsection
-# When isn't it useful? #
-
-!SLIDE bullets incremental transition=scrollUp
-# It's always useful #
-
-* It's an easy way to stay organized and keep your logs manageable
-* And therefore stay...performant?
-
-!SLIDE subsection
-# Example #
-
-!SLIDE commandline incremental
-
-  $ brew install logrotate
-
-  $ export PATH=${PATH}:/usr/local/sbin
+!SLIDE 
+# Chapter-by-chapter #
 
 !SLIDE
-# Sample config in /etc/logrotate.d/ #
+# This book does things like... #
 
-    @@@ diff 
-    /Users/travisvalentine/hungry-projects/feed_engine/log/*.log {
-      size 0k
-      missingok
-      rotate 7
-      compress
-      delaycompress
-      notifempty
-      copytruncate
-    }
+!SLIDE bullets
+# customize `render` #
 
-!SLIDE commandline incremental
+* `ActionController::Renderers.add :pdf do |filename, options|`
 
-  $ logrotate -f <configfile>
+!SLIDE bullets
+# create a mail gem #
 
-!SLIDE center
-# Result #
+* Protip: At the end of the chapter, José links to a gem that his company maintains that does what he builds but has more functionality. It's called [Mail Form](https://github.com/plataformatec/mail_form).
 
-![Tada](logrotate.png)
+!SLIDE bullets
+# customize templates #
 
-!SLIDE center bullets
-# Resources #
+* Using Resolver API and `virtual_path`
+* Resolver API has one method called `find_all`
 
-* Logrotate on [linuxcommand.org](http://linuxcommand.org/man_pages/logrotate8.html)
-* Tutorial on logrotate for [Rails](http://nullislove.com/2007/09/10/rotating-rails-log-files/)
-* My [gist](https://gist.github.com/2848862) with the code from this presentation
+!SLIDE bullets
+# create a new template handler (MERB) #
+
+* Configure new template with railtie `class Railtie < Rails::Railtie`
+* `config.generators.mailer :template_engine => :merb`
+
+!SLIDE bullets
+# work with Rails engines #
+
+* You can use engines to specify paths
+* `class Engine < Rails::Engine`
+* `paths.app.controllers = "lib/controllers"`
+* `end`
+
+!SLIDE bullets
+# work with responders #
+
+!SLIDE bullets
+# customize `I18n` #
+
+!SLIDE bullets
+# Ever wonder how... #
+
+* `_determine_template` and `_render_template` work
+* `to_key` is used by `dom_id` in views
+* the `persisted?` method is used in controllers and views
+* To create I18n flash messages
+
+!SLIDE bullets
+# Or are intrigued by... #
+
+* The fact that each validation is a class (ex: `PresenceValidator`)
+
+!SLIDE bullets
+# Or love facts like... #
+
+* Rails, before a request, automatically converts `controller#action` to a Rack application.
+
+!SLIDE
+# Then this is a book for you #
+
+!SLIDE
+# Key Takeaway #
+
+* `git clone https://github.com/rails/rails.git`
+* `cd rails`
+* READ SOURCE
+
+!SLIDE
+# Thanks #
