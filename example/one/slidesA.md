@@ -88,7 +88,7 @@
 !SLIDE
 # Then this is a book for you #
 
-!SLIDE
+!SLIDE bullets
 # Key Takeaway #
 
 * `git clone https://github.com/rails/rails.git`
